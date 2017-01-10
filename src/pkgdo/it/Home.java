@@ -1,8 +1,11 @@
 package pkgdo.it;
 
 import javafx.application.Application;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.scene.*;
 
@@ -11,21 +14,40 @@ public class Home extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		GridPane grid = new GridPane();
+		grid.setMinWidth(600);
+		grid.setMinHeight(400);
+		grid.setGridLinesVisible(false);
+		grid.setHgap(5);
+		grid.setVgap(20);
+
+		Label tableArea = new Label("This is where tasks table will come");
+		tableArea.setMinWidth(600);
 		
+		GridPane.setConstraints(tableArea, 1, 1, 3, 1);
 		
-		Button b1 = new Button("First Button");
-		Button b2 = new Button("Second longer button");
-		Button b3 = new Button("Third");
-		Button b4 = new Button("Fourth");
+		TextField taskName = new TextField();
+		taskName.setPromptText("Enter Task Name");
+		taskName.setText("Default Text");
+		taskName.setMinWidth(300);
+		GridPane.setConstraints(taskName, 2, 2);
 		
-		GridPane.setConstraints(b1, 1, 1);
-		GridPane.setConstraints(b2, 2, 1);
-		GridPane.setConstraints(b3, 2, 1);
-		GridPane.setConstraints(b4, 2, 2);
+		ComboBox priority = new ComboBox();
+		priority.getItems().addAll("High", "Low", "Medium");
+		priority.setPromptText("Enter Priority");
+		GridPane.setConstraints(priority, 1, 2);
 		
-		grid.getChildren().addAll(b1, b2, b3, b4);
+		Button addButton = new Button("Add");
+		addButton.setMinWidth(100);
+		GridPane.setConstraints(addButton, 3, 2);
 		
-		Scene scene = new Scene(grid, 300, 400);
+		Button cancelButton = new Button("Cancel");
+		addButton.setMinWidth(100);
+		GridPane.setConstraints(cancelButton, 3, 3);
+		
+		grid.getChildren().addAll(tableArea, taskName, priority, addButton, cancelButton);
+		
+		Scene scene = new Scene(grid, 600, 400);
+		
 		stage.setTitle("Do-It!");
 		stage.setAlwaysOnTop(true);
 		stage.setResizable(false);
